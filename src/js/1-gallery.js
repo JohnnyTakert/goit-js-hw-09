@@ -68,13 +68,13 @@ const images = [
 ];
 
 try {
-  const galleryContainer = document.querySelector('.gallery');
-  if (!galleryContainer) {
+  const gallery = document.querySelector('.gallery');
+  if (!gallery) {
     throw new Error('Gallery container not found');
   }
 
   const galleryMarkup = createGalleryMarkup(images);
-  galleryContainer.innerHTML = galleryMarkup;
+  gallery.innerHTML = galleryMarkup;
 
   const lightbox = new SimpleLightbox('.gallery a', {
     captionsData: 'alt',
@@ -88,16 +88,16 @@ try {
 function createGalleryMarkup(images) {
   try {
     return images
-      .map(({ small, large, description }) => {
-        if (!small || !large || !description) {
+      .map(({ preview, original, description }) => {
+        if (!preview || !original || !description) {
           throw new Error('Invalid image data');
         }
         return `
                 <li class="gallery-item">
-                    <a class="gallery-link" href="${large}">
+                    <a class="gallery-link" href="${original}">
                         <img 
                             class="gallery-image" 
-                            src="${small}" 
+                            src="${preview}" 
                             alt="${description}" 
                         />
                     </a>
